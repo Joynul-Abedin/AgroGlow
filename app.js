@@ -10,15 +10,21 @@ app.set('view engine', 'ejs');
 
 //middleware
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(exSession({secret: 'my secret value', saveUninitialized: true, resave: false }));
+app.use(exSession({
+	secret: 'my secret value',
+	saveUninitialized: true, 
+	resave: false 
+}));
 app.use(cookieParser());
 
 app.use('/home', home);
 
 //route
 app.get('/', (req, res)=>{
-	res.send('Hello from express server');	
+	res.render('views/index', ()=>{
+		console.log('index page is running');
+	});	
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Server starts at ${PORT}`));
